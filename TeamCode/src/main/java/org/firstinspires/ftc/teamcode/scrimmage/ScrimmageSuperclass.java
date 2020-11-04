@@ -83,11 +83,28 @@ public abstract class ScrimmageSuperclass extends LinearOpMode {
             resetDriveMode();
         }
     }
+    // is this what you want 
+    public void backward(double pow, double inches) {
 
-    /**
-     *  Using the forward() method as a template, create the movement methods for backward,
-     *  strafeLeft, and strafeRight.
-     */
+        double target = inches * DRIVE_TICKS_PER_INCH * (5.15/6);
+
+        if (opModeIsActive()) {
+
+            resetDriveEncoders();
+            setDriveTarget(target,
+                    -1, -1,
+                    -1, -1);
+            setDriveMode();
+
+            while (opModeIsActive() && driveIsBusy()) {
+
+                setDrivePower(pow);
+            }
+
+            setDrivePower(0);
+            resetDriveMode();
+        }
+    }
 
     public void rotateLeft(double pow, double angle) {
 
@@ -109,10 +126,27 @@ public abstract class ScrimmageSuperclass extends LinearOpMode {
             resetDriveMode();
         }
     }
+        // is this good 
+    public void rotateRight(double pow, double angle) {
 
-    /**
-     *  Using the rotateLeft() method as a template, create the movement methods for rotateRight
-     */
+        double target = angle * DRIVE_TICKS_PER_DEGREE;
+
+        if (opModeIsActive()) {
+
+            resetDriveEncoders();
+            setDriveTarget(target,
+                    1, -1,
+                    1, -1);
+            setDriveMode();
+
+            while (opModeIsActive() && driveIsBusy()) {
+                setDrivePower(pow);
+            }
+
+            setDrivePower(0);
+            resetDriveMode();
+        }
+    }
 
     // UTILITY METHODS -----------------------------------------------------------------------------
 
